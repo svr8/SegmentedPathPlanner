@@ -1,3 +1,4 @@
+# initialise map
 COLUMNS = 117
 ROWS = 29
 
@@ -33,16 +34,11 @@ map_data = [
   '111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
 ]
 
+# initalise points on map
 START_ROW = 3
 START_COL = 5
-DESTINATION_COUNT = 5
-DESTINATION_LIST = [
-  [3, 3],
-  [20, 20],
-  [26, 100],
-  [15, 85],
-  [4, 34]
-]
+DESTINATION_ROW = 25
+DESTINATION_COL = 100
 
 print(str(ROWS) + " " + str(COLUMNS))
 
@@ -54,10 +50,4 @@ for i in range(0, ROWS):
   print()
 
 print(str(START_ROW) + " " + str(START_COL))
-
-print(DESTINATION_COUNT)
-for i in range(0, DESTINATION_COUNT):
-  print(str(DESTINATION_LIST[i][0]) + " " + str(DESTINATION_LIST[i][1]))
-
-
-
+print(str(DESTINATION_ROW) + " " + str(DESTINATION_COL))

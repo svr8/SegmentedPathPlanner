@@ -27,12 +27,8 @@ class arena:
 
     # initalise destinations
     line = lineList.pop(0)
-    destinationCount = int(line[0])
-    self.destination = []
-    for i in range(0, destinationCount):
-      line = lineList.pop(0).split(' ')
-      c = cell(int(line[0]), int(line[1]))
-      self.destination.append( c )
+    self.destinationCell = cell(int(line[0]), int(line[1]))
+
     
   def __str__(self):
     res = ""
@@ -46,9 +42,7 @@ class arena:
     res = res + ("ROWS = " + str(self.rows) + "\n")
     res = res + ("COLS = " + str(self.cols) + "\n")
     res = res + ("START CELL = " + str(self.startCell.row) + ", " + str(self.startCell.col) + "\n")
-    res = res + ("DESTINATION LIST: " + "\n")
-    for i in range(0, len(self.destination)):
-      res = res + ("#" + str((i+1)) + ": " + str(self.destination[i].row) + ", " + str(self.destination[i].col) + "\n")
-    
+    res = res + ("DESTINATION CELL = " + str(self.destinationCell.row) + ", " + str(self.destinationCell.col) + "\n")
+
     return res
 

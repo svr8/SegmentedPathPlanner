@@ -1,5 +1,5 @@
 from cell import cell
-
+from node_type import node_type
 class arena:
   
   def __init__(self, filename):
@@ -12,32 +12,39 @@ class arena:
     self.rows = int(line[0])
     self.cols = int(line[1])
     
-
     self.cell = []
     for i in range(0, self.rows):
       self.cell.append([])
+
       line = lineList.pop(0)
       for j in range(0, self.cols):
-        cellData = 0 if line[j]=='0' else 1
+        cellData = node_type.FREE if line[j]=='0' else node_type.BLOCK
         self.cell[i].append(cellData)
       
     # initialise start point
     line = lineList.pop(0).split(' ')
     self.startCell = cell(int(line[0]), int(line[1]))
 
-    # initalise destinations
-    line = lineList.pop(0)
+    # initialise destination point
+    line = lineList.pop(0).split(' ')
     self.destinationCell = cell(int(line[0]), int(line[1]))
 
-    
   def __str__(self):
     res = ""
     
-    res = res + "ARENA: \n"
-    for i in range(0, self.rows):
-      for j in range(0, self.cols):
-        res = res + str(self.cell[i][j])
-      res = res + "\n"
+    # res = res + "ARENA: \n"
+    # for i in range(0, self.rows):
+    #   for j in range(0, self.cols):
+    #     r = ""
+    #     if self.cell[i][j] == node_type.FREE:
+    #       r = "0"
+    #     elif self.cell[i][j] == node_type.BLOCK:
+    #       r = "1"
+    #     else:
+    #       r = "2" # never occurs
+        
+    #     res = res + r
+    #   res = res + "\n"
     
     res = res + ("ROWS = " + str(self.rows) + "\n")
     res = res + ("COLS = " + str(self.cols) + "\n")

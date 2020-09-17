@@ -13,8 +13,8 @@
 using namespace std;
 
 const int ALPHA = 5;
-const string TEST_PATH_PREFIX = "tests5/";
-const string MAP_PATH_PREFIX = "maps_250x250/sample";
+const string TEST_PATH_PREFIX = "tests/random_maps/maps_250x250/alpha5/";
+const string MAP_PATH_PREFIX = "maps/random_maps/maps_250x250/sample";
 
 void print_path(int &path_length, vector<cell> &path) {
   cout << path_length << '\n'; 

@@ -1,1 +1,1 @@
-# Layered-PathPlanner
+# SegmentedPathPlanner

@@ -7,13 +7,15 @@
 
 using namespace std;
 
-// arean represents the robot environment.
-// once the arena has been initialised and map file has been parsed,
-// it is not meant to be modified again.
+enum arena_type {
+  ARENA_CUSTOM,
+  ARENA_MOVING_AI
+};
 
 class arena {
   private:
     cell_type** graph;
+    void parse_custom(string& filepath);
 
   public:
     cell start;
@@ -22,7 +24,7 @@ class arena {
     int height;
 
     arena();
-    arena(string& filepath);
+    arena(string& filepath, arena_type map_type);
     cell_type get(int i, int j);
     void set(int i, int j, cell_type type);
 };

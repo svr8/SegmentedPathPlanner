@@ -10,9 +10,14 @@ using namespace std;
 arena::arena() {
 }
 
-// the file passed must contain content in the format given for Random Map in Documentation.
-arena::arena(string& filename) {
-  ifstream file(filename);
+arena::arena(string& filepath, arena_type map_type) {
+  if(map_type == ARENA_CUSTOM) {
+    parse_custom(filepath);
+  }
+}
+
+void arena::parse_custom(string& filepath) {
+  ifstream file(filepath);
   string line;
   string_tokenizer st;
   int r, c;

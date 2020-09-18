@@ -1,6 +1,4 @@
-# Documentation
-
-## arena
+# Arena
 
 #### arena_custom
 

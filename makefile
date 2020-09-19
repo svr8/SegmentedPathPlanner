@@ -23,13 +23,24 @@ build:
 	# build priority queue based dijkstra robot
 	g++ -c robot/robot_pqdj.cpp -I ./robot -o ./builds/robot_pqdj.o
 
-	# build main
-	g++ -c main/main.cpp -I./main -o ./builds/main.o
+run_custom:
+	# build main for custom maps
+	g++ -c main/main_custom.cpp -I./main -o ./builds/main_custom.o
 
 	# link all objects to main
-	g++ -o app ./builds/string_tokenizer.o ./builds/cell.o ./builds/node_astar.o ./builds/node_pqdj.o ./builds/arena.o ./builds/robot_astar.o ./builds/robot_dj.o ./builds/robot_pqdj.o ./builds/main.o
+	g++ -o app ./builds/string_tokenizer.o ./builds/cell.o ./builds/node_astar.o ./builds/node_pqdj.o ./builds/arena.o ./builds/robot_astar.o ./builds/robot_dj.o ./builds/main_custom.o
+	
+	# execute
+	./app
 
-run:
+run_movingai:
+	# build main for moving ai maps
+	g++ -c main/main_moving_ai.cpp -I./main -o ./builds/main_moving_ai.o
+
+	# link all objects to main
+	g++ -o app ./builds/string_tokenizer.o ./builds/cell.o ./builds/node_astar.o ./builds/node_pqdj.o ./builds/arena.o ./builds/robot_astar.o ./builds/robot_dj.o ./builds/robot_pqdj.o ./builds/main_moving_ai.o
+	
+	# execute
 	./app
 
 clean:

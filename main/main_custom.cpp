@@ -12,15 +12,15 @@
 
 using namespace std;
 
-const int ALPHA = 5;
-const string TEST_PATH_PREFIX = "tests/grids/custom_random/maps_250x250/alpha5/";
+const int ALPHA = 10;
+const string TEST_PATH_PREFIX = "tests/grids/custom_random/maps_250x250/alpha10/";
 const string MAP_PATH_PREFIX = "datasets/grids/custom_random/maps_250x250/sample";
 
-void print_path(int &path_length, vector<cell> &path) {
-  cout << path_length << '\n'; 
-  for(int i=path.size()-1;i>=0;i--)
-    cout << path[i].col << " " << path[i].row << '\n';
-}
+// void print_path(int &path_length, vector<cell> &path) {
+//   cout << path_length << '\n'; 
+//   for(int i=path.size()-1;i>=0;i--)
+//     cout << path[i].col << " " << path[i].row << '\n';
+// }
 
 void solve_map_dijkstra(string input_path, ofstream &output_file) {
   arena env = arena(input_path, ARENA_CUSTOM);
@@ -148,7 +148,6 @@ int main() {
   ofstream output_file;
 
   output_path = TEST_PATH_PREFIX + "a_star.csv";
-  output_file;
   output_file.open(output_path);
   output_file << "Map Label, Path Length, Time (ms)\n";
   for(int i=0;i<1000;i++) {
@@ -159,7 +158,6 @@ int main() {
   output_file.close();
 
   // output_path = TEST_PATH_PREFIX + "a_star_segmented.csv";
-  // output_file;
   // output_file.open(output_path);
   // output_file << "Map Label, Path Length, Time (ms)\n";
   // for(int i=0;i<1000;i++) {
@@ -170,7 +168,6 @@ int main() {
   // output_file.close();
 
   // output_path = "tests/dijkstra.csv";
-  // output_file;
   // output_file.open(output_path);
   // output_file << "Map Label, Path Length, Time (ms)\n";
   // for(int i=0;i<1000;i++) {
@@ -181,7 +178,6 @@ int main() {
   // output_file.close();
   
   // output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
-  // output_file;
   // output_file.open(output_path);
   // output_file << "Map Label, Path Length, Time (ms)\n";
   // for(int i=0;i<1000;i++) {
@@ -192,7 +188,6 @@ int main() {
   // output_file.close();
 
   // output_path = TEST_PATH_PREFIX + "pq_dijkstra.csv";
-  // output_file;
   // output_file.open(output_path);
   // output_file << "Map Label, Path Length, Time (ms)\n";
   // for(int i=0;i<1000;i++) {
@@ -203,7 +198,6 @@ int main() {
   // output_file.close();
 
   // output_path = TEST_PATH_PREFIX + "pq_dijkstra_segmented.csv";
-  // output_file;
   // output_file.open(output_path);
   // output_file << "Map Label, Path Length, Time (ms)\n";
   // for(int i=0;i<1000;i++) {

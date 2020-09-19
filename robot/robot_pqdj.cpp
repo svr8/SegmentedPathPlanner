@@ -41,14 +41,18 @@ robot_pqdj::robot_pqdj(arena a) {
   dist[cur_node.pos.row][cur_node.pos.col] = 0;
 }
 
-// robot_pqdj::~robot_pqdj() {
-//   for(int i=0;i<env.height;i++) {
-//     delete scanned_env[i];
-//     delete dist[i];
-//     delete parent[i];
-//     path.clear();
-//   }
-// }
+robot_pqdj::~robot_pqdj() {
+  for(int i=0;i<env.height;i++) {
+    delete[] cell_state[i];
+    delete[] dist[i];
+    delete[] parent[i];
+  }
+  
+  delete[] cell_state;
+  delete[] dist;
+  delete[] parent;
+  path.clear();
+}
 
 
 void robot_pqdj::set_pos(cell pos) {

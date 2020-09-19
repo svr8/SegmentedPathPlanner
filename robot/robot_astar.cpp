@@ -40,10 +40,14 @@ robot_astar::robot_astar(arena a) {
 
 robot_astar::~robot_astar() {
   for(int i=0;i<env.height;i++) {
-    delete open_list_state[i];
-    delete closed_list_state[i];
-    delete parent[i];
+    delete[] open_list_state[i];
+    delete[] closed_list_state[i];
+    delete[] parent[i];
   }
+  delete[] open_list_state;
+  delete[] closed_list_state;
+  delete[] parent;
+
   path.clear();
   open_list = priority_queue<node_astar, vector<node_astar>, node_compare_on_f>();
   closed_list = priority_queue<node_astar, vector<node_astar>, node_compare_on_f>();

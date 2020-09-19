@@ -209,6 +209,8 @@ void solve_map_astar(string scenepath, string root, string map_name, ofstream &o
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         cout << "a_star: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        
+        env.clear();
     }
 }
 
@@ -231,6 +233,8 @@ void solve_map_astar_segmented(string scenepath, string root, string map_name, o
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         cout << "a_star_segmented: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+
+        env.clear();
     }
 }
 
@@ -253,6 +257,8 @@ void solve_map_dijkstra(string scenepath, string root, string map_name, ofstream
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         cout << "dijkstra: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+
+        env.clear();
     }
 }
 
@@ -275,6 +281,8 @@ void solve_map_dijkstra_segmented(string scenepath, string root, string map_name
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         cout << "dijkstra_segmented: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+
+        env.clear();
     }
 }
 
@@ -297,6 +305,8 @@ void solve_map_pqdj(string scenepath, string root, string map_name, ofstream &ou
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         cout << "pq_dijkstra: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+
+        env.clear();
     }
 }
 
@@ -319,28 +329,26 @@ void solve_map_pqdj_segmented(string scenepath, string root, string map_name, of
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         cout << "pq_dijkstra_segmented: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+
+        env.clear();
     }
 }
 
 int main(int argc, char *argv[]) {
-    // cout << argc << " ";
-    // for(int i=0;i<argc;i++)
-    //     cout << argv[i] << " ";
-    // cout << endl;
     string output_path;
     ofstream output_file;
 
     // // A Star
-    output_path = TEST_PATH_PREFIX + "a_star.csv";
-    output_file.open(output_path);
-    output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
-        string map = scene_list[i];
-        string scenepath = SCENE_PATH_PREFIX + map;
-        solve_map_astar(scenepath, application, map, output_file);
-    }
-    output_file.flush();
-    output_file.close();
+    // output_path = TEST_PATH_PREFIX + "a_star.csv";
+    // output_file.open(output_path);
+    // output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
+    // for(int i=0;i<156;i++) {
+    //     string map = scene_list[i];
+    //     string scenepath = SCENE_PATH_PREFIX + map;
+    //     solve_map_astar(scenepath, application, map, output_file);
+    // }
+    // output_file.flush();
+    // output_file.close();
 
     // // A Star Segmented
     // output_path = TEST_PATH_PREFIX + "a_star_segmented.csv";

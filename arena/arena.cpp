@@ -22,6 +22,13 @@ arena::arena(string& scenepath, string& root, int test_index, arena_type map_typ
   }
 }
 
+void arena::clear() {
+  for(int i=0;i<height;i++) {
+    delete[] graph[i];
+  }
+  delete[] graph;
+}
+
 void arena::parse_custom(string& filepath) {
   ifstream file(filepath);
   string line;

@@ -30,7 +30,7 @@ class robot_pqdj {
 
   public:
     robot_pqdj(arena a);
-    // ~robot_pqdj();
+    ~robot_pqdj();
     void set_pos(cell pos);
     void reset_memory();
     vector<cell> move(cell destination);

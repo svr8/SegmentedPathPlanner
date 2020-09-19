@@ -41,11 +41,14 @@ robot_dj::robot_dj(arena a) {
 
 robot_dj::~robot_dj() {
   for(int i=0;i<env.height;i++) {
-    delete scanned_env[i];
-    delete dist[i];
-    delete parent[i];
+    delete[] scanned_env[i];
+    delete[] dist[i];
+    delete[] parent[i];
     path.clear();
   }
+  delete[] scanned_env;
+  delete[] dist;
+  delete[] parent;
 }
 
 void robot_dj::set_pos(cell pos) {

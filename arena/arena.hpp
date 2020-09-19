@@ -30,6 +30,7 @@ class arena {
     arena(string& scenepath, string& root, int test_index, arena_type map_type);
     cell_type get(int i, int j);
     void set(int i, int j, cell_type type);
+    void clear();
 };
 
 #endif

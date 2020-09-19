@@ -17,22 +17,40 @@ const string TEST_PATH_PREFIX = "tests/grids/moving_ai/game_dragon_age_origins/a
 const string application = "game_dragon_age_origins/";
 const string SCENE_PATH_PREFIX = "datasets/grids/moving_ai/game_dragon_age_origins/benchmark-probems/";
 
-void solve_map_astar(string scenepath, string root, string map_name, int test_index, ofstream &output_file) {
-    arena env = arena(scenepath, root, test_index, ARENA_MOVING_AI);
-    robot_astar bot = robot_astar(env);
+int get_test_count(string scenepath) {
+    ifstream scenefile(scenepath);
+    string line;
+    int tests = 0;
 
-    int path_length;
-    vector<cell> path;
+    // skip version line
+    getline(scenefile, line);
+
+    // count tests
+    while(getline(scenefile, line)) tests++;
+
+    return tests;
+}
+
+void solve_map_astar(string scenepath, string root, string map_name, ofstream &output_file) {
+    int test_count = get_test_count(scenepath);
     
-    bot.set_pos(env.start);
-    auto start_time = chrono::steady_clock::now();
-    path = bot.move(env.destination);
-    auto end_time = chrono::steady_clock::now();
-    auto diff_time = end_time - start_time;
-    path_length = path.size() - 1;
+    for(int test_index=0; test_index<test_count; test_index++) {
+        arena env = arena(scenepath, root, test_index, ARENA_MOVING_AI);
+        robot_astar bot = robot_astar(env);
 
-    output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
-    cout << "a_star: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        int path_length;
+        vector<cell> path;
+        
+        bot.set_pos(env.start);
+        auto start_time = chrono::steady_clock::now();
+        path = bot.move(env.destination);
+        auto end_time = chrono::steady_clock::now();
+        auto diff_time = end_time - start_time;
+        path_length = path.size() - 1;
+
+        output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        cout << "a_star: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+    }
 }
 
 int main() {
@@ -45,7 +63,7 @@ int main() {
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
     string map = "arena.map.scen";
     string scenepath = SCENE_PATH_PREFIX + map;
-    solve_map_astar(scenepath, application, map, 0, output_file);
+    solve_map_astar(scenepath, application, map, output_file);
     output_file.flush();
     output_file.close();
 

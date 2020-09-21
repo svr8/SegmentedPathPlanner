@@ -77,15 +77,21 @@ def simulate_bot(img, cur_pos, simFilePath):
 
   # simulation
   for _ in range(count):
+    # get next robot position
     line = lineList.pop(0).split(' ')
     col = int(line[0])
     row = int(line[1])
 
+    # (x0, y0) reperesents old postion
     x0 = cur_pos[0]
     y0 = cur_pos[1]
+
+    # (x1, y1) represents new postion
     x1 = col
     y1 = row
 
+    # uncomment the line below to remove path history
+    # img[x0][y0] = CLEAR_COLOR
     img[y1][x1] = BOT_COLOR
     plt.matshow(img, fignum=False)
     plt.pause(0.1)

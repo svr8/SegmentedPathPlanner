@@ -12,8 +12,8 @@ using namespace std;
 
 class robot_dj {
   private:
-    cell cur_pos;
     arena env;
+    cell cur_pos;
     cell_type **scanned_env;
     double **dist;
     vector<cell> path;

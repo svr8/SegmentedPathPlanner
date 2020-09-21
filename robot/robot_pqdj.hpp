@@ -10,7 +10,7 @@
 
 using namespace std;
 
-// robot_dj solves path planning problem using PriorityQueue based Dijkstra and 
+// robot_pqdj solves path planning problem using PriorityQueue based Dijkstra and 
 // PriorityQueue based Segmented Dijkstra(Proposed) algorithms.
 
 class robot_pqdj {

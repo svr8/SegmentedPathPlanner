@@ -84,16 +84,18 @@ void robot_dj::reset_memory() {
 }
 
 bool robot_dj::is_destination_reached(cell &destination) {
-  return (cur_pos.row == destination.row && cur_pos.col == destination.col);
+  return (
+    cur_pos.row == destination.row && 
+    cur_pos.col == destination.col
+  );
 }
 
 bool robot_dj::is_deadend(cell &destination) {
-  // test("#12", destination.row>=0);
-  // test("#13", destination.col>=0);
-  // test("#14", destination.row<env.height);
-  // test("#15", destination.col<env.width);
-
-  return (cur_pos.row==-1 || cur_pos.col==-1 || scanned_env[destination.row][destination.col] == BLOCK);
+  return (
+    cur_pos.row==-1 || 
+    cur_pos.col==-1 || 
+    scanned_env[destination.row][destination.col] == BLOCK
+  );
 }
 
 void robot_dj::generate_path(cell target) {
@@ -106,7 +108,6 @@ void robot_dj::generate_path(cell target) {
 }
 
 vector<cell> robot_dj::move(cell destination) {
-
   const double INF = 10000000;
   const int TOTAL_CELLS = env.width * env.height * 100;
   bool found = false;
@@ -154,12 +155,11 @@ vector<cell> robot_dj::move(cell destination) {
 }
 
 vector<cell> robot_dj::move_segmented(cell destination, int alpha) {
-
   const double INF = 10000000;
   const int TOTAL_CELLS = env.width * env.height*100;
   bool found = false;
 
-  cell layer0_destination;
+  cell segment;
   double minD;
   cell next_pos;
   int i0, j0, i1, j1, p;
@@ -167,24 +167,18 @@ vector<cell> robot_dj::move_segmented(cell destination, int alpha) {
   const int copy_alpha = alpha;
 
   while(!found) {
-    layer0_destination = get_layer0_destination(destination, alpha);
+    segment = get_next_segment(destination, alpha);
     
     for(int i=0;i<TOTAL_CELLS;i++) {
+      // get minimum distance cell
       minD = INF;
       next_pos = cell();
-
-      // get minimum distance cell
       i0 = max(0, cur_pos.row-alpha);
       i1 = min(env.height, cur_pos.row+alpha);
       j0 = max(0, cur_pos.col-alpha);
       j1 = min(env.width, cur_pos.col+alpha);
       for(int i=i0;i<i1;i++) {
         for(int j=j0;j<j1;j++) {
-          // test("#0",i>=0);
-          // test("#1", j>=0);
-          // test("#2", i<env.height);
-          // test("#3", j<env.width);
-
           if(scanned_env[i][j] == FREE && dist[i][j] < minD) {
             minD = dist[i][j];
             next_pos = cell(i,j);
@@ -192,26 +186,22 @@ vector<cell> robot_dj::move_segmented(cell destination, int alpha) {
         }
       }
 
+      // update current position
       cur_pos = next_pos;
       if(cur_pos.row==-1 && alpha<max_alpha) {
         alpha += 5;
         continue;
       }
-
       if(is_deadend(destination))
         break;
-
-      // test("#4", cur_pos.row>=0);
-      // test("#5", cur_pos.col>=0);
-      // test("#6", cur_pos.row<env.height);
-      // test("#7", cur_pos.col<env.width);
       scanned_env[cur_pos.row][cur_pos.col] = VISITED;
 
       // destination check
       found = is_destination_reached(destination);
-      if(found || is_destination_reached(layer0_destination))
+      if(found || is_destination_reached(segment))
         break;
 
+      // update environment
       scan_arena();    
     }
     
@@ -229,7 +219,7 @@ vector<cell> robot_dj::move_segmented(cell destination, int alpha) {
   return path;
 }
 
-cell robot_dj::get_layer0_destination(cell &destination, int &alpha) {
+cell robot_dj::get_next_segment(cell &destination, int &alpha) {
   cell res;
   res.row = cur_pos.row;
   res.col = cur_pos.col;
@@ -416,11 +406,6 @@ void robot_dj::scan_cell(cell c) {
   int row = c.row;
   int col = c.col;
 
-  // test("#8", row>=0);
-  // test("#9", col>=0);
-  // test("#10", row<env.height);
-  // test("#11", col<env.width);
-
   double d = dist[cur_pos.row][cur_pos.col] + cur_pos.euclidean_distance(c);
   if(d < dist[row][col]) {
     dist[row][col] = d;
@@ -431,11 +416,4 @@ void robot_dj::scan_cell(cell c) {
 
   if(scanned_env[row][col] == UNVISITED)
     scanned_env[row][col] = env.get(row,col);
-}
-
-void robot_dj::test(string message, bool flag) {
-  if(!flag) {
-    cout << message << endl;
-    abort();
-  }
 }

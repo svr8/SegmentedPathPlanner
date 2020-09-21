@@ -8,6 +8,7 @@
 #include <../node/node_astar.hpp>
 #include <../arena/arena.hpp>
 
+// robot_astar solves path planning problem using A* and Segmented A*(Proposed) algorithms.
 using namespace std;
 
 class robot_astar {
@@ -23,7 +24,6 @@ class robot_astar {
     cell **parent;
 
     void generate_path(cell target);
-    void test(string message, bool flag);
 
   public:
     robot_astar(arena a);
@@ -31,7 +31,7 @@ class robot_astar {
     void set_pos(cell pos);
     vector<cell> move(cell destination);
     vector<cell> move_segmented(cell destination, int alpha);
-    cell get_layer0_destination(cell &destination, int &alpha);
+    cell get_next_segment(cell &destination, int &alpha);
     void scan_arena(cell &destination);
     void scan_cell(cell c, cell &destination);
 };

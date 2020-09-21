@@ -60,7 +60,6 @@ void robot_pqdj::set_pos(cell pos) {
 }
 
 void robot_pqdj::reset_memory() {
-
   cur_node = node_pqdj(env.start.row, env.start.col, 0);
 
   // reset values
@@ -96,16 +95,18 @@ void robot_pqdj::reset_memory() {
 }
 
 bool robot_pqdj::is_destination_reached(cell &destination) {
-  return (cur_node.pos.row == destination.row && cur_node.pos.col == destination.col);
+  return (
+    cur_node.pos.row == destination.row && 
+    cur_node.pos.col == destination.col
+  );
 }
 
 bool robot_pqdj::is_deadend(cell &destination) {
-  // test("#12", destination.row>=0);
-  // test("#13", destination.col>=0);
-  // test("#14", destination.row<env.height);
-  // test("#15", destination.col<env.width);
-
-  return (cur_node.pos.row==-1 || cur_node.pos.col==-1 || cell_state[destination.row][destination.col] == BLOCK);
+  return (
+    cur_node.pos.row==-1 || 
+    cur_node.pos.col==-1 || 
+    cell_state[destination.row][destination.col] == BLOCK
+  );
 }
 
 void robot_pqdj::generate_path(cell target) {
@@ -118,7 +119,6 @@ void robot_pqdj::generate_path(cell target) {
 }
 
 vector<cell> robot_pqdj::move(cell destination) {
-
   const double INF = 10000000;
   const int TOTAL_CELLS = env.width * env.height * 100;
   bool found = false;
@@ -166,20 +166,19 @@ vector<cell> robot_pqdj::move(cell destination) {
 }
 
 vector<cell> robot_pqdj::move_segmented(cell destination, int alpha) {
-
   const double INF = 10000000;
   const int TOTAL_CELLS = env.width * env.height*100;
   bool found = false;
   const int max_alpha = max(env.width, env.height);
 
-  cell layer0_destination;
+  cell segment;
   double minD;
   node_pqdj next_node = node_pqdj(cur_node.pos.row, cur_node.pos.col, 0);
   scanned_env.push(next_node);
   int i0, j0, i1, j1, p;
 
   while(!found) {
-    layer0_destination = get_layer0_destination(destination, alpha);
+    segment = get_next_segment(destination, alpha);
 
     for(int i=0;i<TOTAL_CELLS;i++) {
       minD = INF;
@@ -193,27 +192,22 @@ vector<cell> robot_pqdj::move_segmented(cell destination, int alpha) {
           break;
       }
 
-      // cur_pos = next_pos;
+      // update current position
       cur_node = next_node;
       if(cur_node.pos.row==-1 && alpha<max_alpha) {
         alpha += 5;
         continue;
       }
-
       if(is_deadend(destination))
         break;
-
-      // test("#4", cur_pos.row>=0);
-      // test("#5", cur_pos.col>=0);
-      // test("#6", cur_pos.row<env.height);
-      // test("#7", cur_pos.col<env.width);
       cell_state[cur_node.pos.row][cur_node.pos.col] = VISITED;
 
       // destination check
       found = is_destination_reached(destination);
-      if(found || is_destination_reached(layer0_destination))
+      if(found || is_destination_reached(segment))
         break;
 
+      // update environment
       scan_arena();    
     }
     
@@ -231,7 +225,7 @@ vector<cell> robot_pqdj::move_segmented(cell destination, int alpha) {
   return path;
 }
 
-cell robot_pqdj::get_layer0_destination(cell &destination, int &alpha) {
+cell robot_pqdj::get_next_segment(cell &destination, int &alpha) {
   cell res;
   res.row = cur_node.pos.row;
   res.col = cur_node.pos.col;
@@ -418,11 +412,6 @@ void robot_pqdj::scan_cell(cell c) {
   int row = c.row;
   int col = c.col;
 
-  // test("#8", row>=0);
-  // test("#9", col>=0);
-  // test("#10", row<env.height);
-  // test("#11", col<env.width);
-
   double d = dist[cur_node.pos.row][cur_node.pos.col] + cur_node.pos.euclidean_distance(c);
   if(d < dist[row][col]) {
     dist[row][col] = d;
@@ -436,11 +425,4 @@ void robot_pqdj::scan_cell(cell c) {
 
   if(cell_state[row][col] == UNVISITED)
     cell_state[row][col] = env.get(row,col);
-}
-
-void robot_pqdj::test(string message, bool flag) {
-  if(!flag) {
-    cout << message << endl;
-    abort();
-  }
 }

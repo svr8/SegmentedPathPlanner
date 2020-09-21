@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// string_tokenizer is used by arena parse map files in this project
 class string_tokenizer {
   private:
     vector<string> val;

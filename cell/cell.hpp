@@ -8,6 +8,7 @@ enum cell_type {
   BLOCK
 };
 
+// cell is a single point in the grid environment
 class cell {
   public:
     int row;

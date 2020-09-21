@@ -7,11 +7,15 @@
 
 using namespace std;
 
+// arena_type represents different types of datasets
+// that the algorithm will be tested on.
 enum arena_type {
   ARENA_CUSTOM,
   ARENA_MOVING_AI
 };
 
+// arena is a a simple parser for different dataset types.
+// it is the outside world for a robot for simulation.
 class arena {
   private:
     cell_type** graph;
@@ -19,11 +23,11 @@ class arena {
     void parse_movingai(string& scenepath, string& root, int test_index);
 
   public:
+    int bucket; // bucket is a group of tests for the same map
     cell start;
     cell destination;
     int width;
     int height;
-    int bucket;
 
     arena();
     arena(string& filepath, arena_type map_type);

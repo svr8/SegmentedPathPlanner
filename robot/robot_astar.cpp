@@ -68,29 +68,32 @@ void robot_astar::generate_path(cell target) {
 
 vector<cell> robot_astar::move(cell destination) {
 
-  // update openlist
+  // update openlist with current position
   node_astar next_node = node_astar(cur_node.pos.row, cur_node.pos.col);
   open_list.push(next_node);
   open_list_state[next_node.pos.row][next_node.pos.col] = 0;
 
   while(!open_list.empty() && !found) {
+    // get next node
     next_node = open_list.top();
     open_list.pop();
+
     while(closed_list_state[next_node.pos.row][next_node.pos.col]!=-1 && !open_list.empty()) {
       next_node = open_list.top();
       open_list.pop();
     }
     open_list_state[next_node.pos.row][next_node.pos.col] = -1;
 
+    // update current node
     cur_node = next_node;
-    // cout << cur_node.pos.row << " " << cur_node.pos.col << "\n";
     found = cur_node.pos.is_equal(destination);
-    scan_arena(destination);
     
+    // update environment
+    scan_arena(destination);
     closed_list.push(next_node);
     closed_list_state[next_node.pos.row][next_node.pos.col] = next_node.f;   
   }
-  // cout << "FOUND: " << found << endl;
+
   if(found)
     generate_path(destination);
   
@@ -107,23 +110,28 @@ vector<cell> robot_astar::move_segmented(cell destination, int alpha) {
   bool t_found = false;
 
   while(!found && !open_list.empty()) {
-    t_destination = get_layer0_destination(destination, alpha);
+    // calculate segment
+    t_destination = get_next_segment(destination, alpha);
     t_found = false;
 
     while(!found && !t_found && !open_list.empty()) {
+      // get next node
       next_node = open_list.top();
       open_list.pop();
+
       while(closed_list_state[next_node.pos.row][next_node.pos.col]!=-1 && !open_list.empty()) {
         next_node = open_list.top();
         open_list.pop();
       }
       open_list_state[next_node.pos.row][next_node.pos.col] = -1;
 
+      // update current node
       cur_node = next_node;
       t_found = cur_node.pos.is_equal(t_destination);
       found = cur_node.pos.is_equal(destination);
-      scan_arena(destination);
-      
+
+      // update environment
+      scan_arena(destination);      
       closed_list.push(next_node);
       closed_list_state[next_node.pos.row][next_node.pos.col] = next_node.f;   
     }
@@ -137,7 +145,7 @@ vector<cell> robot_astar::move_segmented(cell destination, int alpha) {
   return path;
 }
 
-cell robot_astar::get_layer0_destination(cell &destination, int &alpha) {
+cell robot_astar::get_next_segment(cell &destination, int &alpha) {
   cell res;
   res.row = cur_node.pos.row;
   res.col = cur_node.pos.col;
@@ -327,11 +335,6 @@ void robot_astar::scan_cell(cell c, cell &destination) {
   int row = c.row;
   int col = c.col;
 
-  // test("#8", row>=0);
-  // test("#9", col>=0);
-  // test("#10", row<env.height);
-  // test("#11", col<env.width);
-
   node_astar successor = node_astar(row, col);
   successor.g = cur_node.g + cur_node.euclidean_distance(successor);
   successor.h = c.euclidean_distance(destination);
@@ -357,11 +360,4 @@ void robot_astar::scan_cell(cell c, cell &destination) {
     closed_list_state[successor.pos.row][successor.pos.col] = successor.f;
   }
   
-}
-
-void robot_astar::test(string message, bool flag) {
-  if(!flag) {
-    cout << message << endl;
-    abort();
-  }
 }

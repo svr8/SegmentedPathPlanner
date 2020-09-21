@@ -16,11 +16,11 @@ const int ALPHA = 10;
 const string TEST_PATH_PREFIX = "tests/grids/custom_random/maps_250x250/alpha10/";
 const string MAP_PATH_PREFIX = "datasets/grids/custom_random/maps_250x250/sample";
 
-// void print_path(int &path_length, vector<cell> &path) {
-//   cout << path_length << '\n'; 
-//   for(int i=path.size()-1;i>=0;i--)
-//     cout << path[i].col << " " << path[i].row << '\n';
-// }
+void print_path(int &path_length, vector<cell> &path) {
+  cout << path_length << '\n'; 
+  for(int i=path.size()-1;i>=0;i--)
+    cout << path[i].col << " " << path[i].row << '\n';
+}
 
 void solve_map_dijkstra(string input_path, ofstream &output_file) {
   arena env = arena(input_path, ARENA_CUSTOM);
@@ -147,6 +147,7 @@ int main() {
   string output_path;
   ofstream output_file;
 
+  // A*
   output_path = TEST_PATH_PREFIX + "a_star.csv";
   output_file.open(output_path);
   output_file << "Map Label, Path Length, Time (ms)\n";
@@ -157,55 +158,61 @@ int main() {
   output_file.flush();
   output_file.close();
 
-  // output_path = TEST_PATH_PREFIX + "a_star_segmented.csv";
-  // output_file.open(output_path);
-  // output_file << "Map Label, Path Length, Time (ms)\n";
-  // for(int i=0;i<1000;i++) {
-  //   string input_path = MAP_PATH_PREFIX + to_string(i);
-  //   solve_map_astar_segmented(input_path, output_file);
-  // }
-  // output_file.flush();
-  // output_file.close();
+  // A* Segmented
+  output_path = TEST_PATH_PREFIX + "a_star_segmented.csv";
+  output_file.open(output_path);
+  output_file << "Map Label, Path Length, Time (ms)\n";
+  for(int i=0;i<1000;i++) {
+    string input_path = MAP_PATH_PREFIX + to_string(i);
+    solve_map_astar_segmented(input_path, output_file);
+  }
+  output_file.flush();
+  output_file.close();
 
-  // output_path = "tests/dijkstra.csv";
-  // output_file.open(output_path);
-  // output_file << "Map Label, Path Length, Time (ms)\n";
-  // for(int i=0;i<1000;i++) {
-  //   string input_path = MAP_PATH_PREFIX + to_string(i);
-  //   solve_map_dijkstra(input_path, output_file);
-  // }
-  // output_file.flush();
-  // output_file.close();
   
-  // output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
-  // output_file.open(output_path);
-  // output_file << "Map Label, Path Length, Time (ms)\n";
-  // for(int i=0;i<1000;i++) {
-  //   string input_path = MAP_PATH_PREFIX + to_string(i);
-  //   solve_map_dijkstra_segmented(input_path, output_file);
-  // }
-  // output_file.flush();
-  // output_file.close();
+  // Dijkstra
+  output_path = TEST_PATH_PREFIX + "dijkstra.csv";
+  output_file.open(output_path);
+  output_file << "Map Label, Path Length, Time (ms)\n";
+  for(int i=0;i<1000;i++) {
+    string input_path = MAP_PATH_PREFIX + to_string(i);
+    solve_map_dijkstra(input_path, output_file);
+  }
+  output_file.flush();
+  output_file.close();
+  
+  // Dijkstra Segmented
+  output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
+  output_file.open(output_path);
+  output_file << "Map Label, Path Length, Time (ms)\n";
+  for(int i=0;i<1000;i++) {
+    string input_path = MAP_PATH_PREFIX + to_string(i);
+    solve_map_dijkstra_segmented(input_path, output_file);
+  }
+  output_file.flush();
+  output_file.close();
 
-  // output_path = TEST_PATH_PREFIX + "pq_dijkstra.csv";
-  // output_file.open(output_path);
-  // output_file << "Map Label, Path Length, Time (ms)\n";
-  // for(int i=0;i<1000;i++) {
-  //   string input_path = MAP_PATH_PREFIX + to_string(i);
-  //   solve_map_pqdj(input_path, output_file);
-  // }
-  // output_file.flush();
-  // output_file.close();
+  // Priority Queue based Dijkstra
+  output_path = TEST_PATH_PREFIX + "pq_dijkstra.csv";
+  output_file.open(output_path);
+  output_file << "Map Label, Path Length, Time (ms)\n";
+  for(int i=0;i<1000;i++) {
+    string input_path = MAP_PATH_PREFIX + to_string(i);
+    solve_map_pqdj(input_path, output_file);
+  }
+  output_file.flush();
+  output_file.close();
 
-  // output_path = TEST_PATH_PREFIX + "pq_dijkstra_segmented.csv";
-  // output_file.open(output_path);
-  // output_file << "Map Label, Path Length, Time (ms)\n";
-  // for(int i=0;i<1000;i++) {
-  //   string input_path = MAP_PATH_PREFIX + to_string(i);
-  //   solve_map_pqdj_segmented(input_path, output_file);
-  // }
-  // output_file.flush();
-  // output_file.close();
+  // Priority Queue Based Dijkstra Segmented
+  output_path = TEST_PATH_PREFIX + "pq_dijkstra_segmented.csv";
+  output_file.open(output_path);
+  output_file << "Map Label, Path Length, Time (ms)\n";
+  for(int i=0;i<1000;i++) {
+    string input_path = MAP_PATH_PREFIX + to_string(i);
+    solve_map_pqdj_segmented(input_path, output_file);
+  }
+  output_file.flush();
+  output_file.close();
 
   return 0;
 }

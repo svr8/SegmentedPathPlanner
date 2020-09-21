@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// robot_dj solves path planning problem using Dijkstra and Segmented Dijkstra(Proposed) algorithms.
+
 class robot_dj {
   private:
     cell cur_pos;
@@ -19,9 +21,8 @@ class robot_dj {
 
     bool is_destination_reached(cell &destination);
     bool is_deadend(cell &destination);
-    cell get_layer0_destination(cell &destination, int &alpha);
+    cell get_next_segment(cell &destination, int &alpha);
     void generate_path(cell target);
-    void test(string message, bool flag);
 
   public:
     robot_dj(arena a);

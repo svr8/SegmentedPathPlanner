@@ -11,4 +11,4 @@
 | **node** | Interpretation of grid cell by robot is in the form of node. | [node.md](node.md) |
 | **robot** | Different bots are defined for each type of algorithm. | - |
 | **string_tokenizer** | Simple space separated string reader. | - |
-| **tests** | All test results are placed here. | - |
+| **tests** | All test results are placed here. | [string_tokenizer.md](string_tokenizer.md) |

@@ -10,6 +10,7 @@ class arena:
   
   def __init__(self, filename):
 
+    # open mapfile
     file = open(filename, 'r')
     lineList = file.read().split('\n')
 
@@ -37,21 +38,6 @@ class arena:
 
   def __str__(self):
     res = ""
-    
-    # res = res + "ARENA: \n"
-    # for i in range(0, self.rows):
-    #   for j in range(0, self.cols):
-    #     r = ""
-    #     if self.cell[i][j] == 0:
-    #       r = "0"
-    #     elif self.cell[i][j] == 1:
-    #       r = "1"
-    #     else:
-    #       r = "2" # never occurs
-        
-    #     res = res + r
-    #   res = res + "\n"
-    
     res = res + ("ROWS = " + str(self.rows) + "\n")
     res = res + ("COLS = " + str(self.cols) + "\n")
     res = res + ("START CELL = " + str(self.startCell[0]) + ", " + str(self.startCell[1]) + "\n")
@@ -62,18 +48,26 @@ class arena:
 def show_arena(a):
   endCell = a.destinationCell
 
+  # create image of a's rows*cols size
   image = np.zeros(a.rows*a.cols)
   image = image.reshape((a.rows, a.cols))
+  
+  # update image cells 
   for i in range(a.rows):
     for j in range(a.cols):
-      image[i][j] = a.cell[i][j]
+      image[i][j] = a.cell[i][j] 
+  
+  # set goal color
   image[endCell[1]][endCell[0]] = GOAL_COLOR
+  
+  # plot image
   plt.matshow(image, fignum=False)
   plt.pause(1)
 
   return image
 
 def simulate_bot(img, cur_pos, simFilePath):
+  # open path file
   file = open(simFilePath, 'r')
   lineList = file.read().split('\n')
 
@@ -92,7 +86,6 @@ def simulate_bot(img, cur_pos, simFilePath):
     x1 = col
     y1 = row
 
-    # img[y0][x0] = CLEAR_COLOR
     img[y1][x1] = BOT_COLOR
     plt.matshow(img, fignum=False)
     plt.pause(0.1)
@@ -100,11 +93,11 @@ def simulate_bot(img, cur_pos, simFilePath):
     cur_pos = [col, row]
 
 def main():
-  env = arena('maps_250x250/sample0')
+  env = arena('datasets/custom_random/maps_250x250/sample0')
   arena_img = show_arena(env)
   print(env)
   cur_pos = [env.startCell[0], env.startCell[1]]
-  simulate_bot(arena_img, cur_pos, 'out')
+  simulate_bot(arena_img, cur_pos, 'tests/path/sample0')
 
   plt.pause(1)
 

@@ -9,6 +9,6 @@
 | **datasets** | Any dataset included in testing the algorithm is placed here. Every dataset has a readme that will describe file formats. | - |
 | **main** | This is a trigger for all robot algorithms and test suits in the project. 2 mains have been defined for 2 datasets: custom and moving ai | - |
 | **node** | Interpretation of grid cell by robot is in the form of node. | [node.md](node.md) |
-| **robot** | Different bots are defined for each type of algorithm. | - |
-| **string_tokenizer** | Simple space separated string reader. | - |
-| **tests** | All test results are placed here. | [string_tokenizer.md](string_tokenizer.md) |
+| **robot** | Different bots are defined for each type of algorithm. | [robot.md](robot.md) |
+| **string_tokenizer** | Simple space separated string reader. | [string_tokenizer.md](string_tokenizer.md) |
+| **tests** | All test results are placed here. | - |

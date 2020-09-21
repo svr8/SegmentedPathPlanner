@@ -12,11 +12,9 @@ using namespace std;
 
 class robot_pqdj {
   private:
-    // cell cur_pos;
     arena env;
     node_pqdj cur_node;
     priority_queue<node_pqdj, vector<node_pqdj>, node_compare> scanned_env;
-    // cell_type **scanned_env;
     cell_type **cell_state;
     double **dist;
     vector<cell> path;

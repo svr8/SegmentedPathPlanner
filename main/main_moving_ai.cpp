@@ -12,8 +12,8 @@
 
 using namespace std;
 
-const int ALPHA = 5;
-const string TEST_PATH_PREFIX = "tests/grids/moving_ai/game_dragon_age_origins/alpha5/";
+const int ALPHA = 10;
+const string TEST_PATH_PREFIX = "tests/grids/moving_ai/game_dragon_age_origins/alpha10/";
 const string application = "game_dragon_age_origins/";
 const string SCENE_PATH_PREFIX = "datasets/grids/moving_ai/game_dragon_age_origins/benchmark-probems/";
 
@@ -208,7 +208,7 @@ void solve_map_astar(string scenepath, string root, string map_name, ofstream &o
         path_length = path.size();
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
-        cout << "a_star: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        cout << "a_star: " << (test_index+1) <<"/" << test_count << " " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
         
         env.clear();
     }
@@ -232,7 +232,7 @@ void solve_map_astar_segmented(string scenepath, string root, string map_name, o
         path_length = path.size();
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
-        cout << "a_star_segmented: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        cout << "a_star_segmented: " << (test_index+1) <<"/" << test_count << " " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
 
         env.clear();
     }
@@ -256,7 +256,7 @@ void solve_map_dijkstra(string scenepath, string root, string map_name, ofstream
         path_length = path.size();
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
-        cout << "dijkstra: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        cout << "dijkstra: " << (test_index+1) <<"/" << test_count << " " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
 
         env.clear();
     }
@@ -280,7 +280,7 @@ void solve_map_dijkstra_segmented(string scenepath, string root, string map_name
         path_length = path.size();
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
-        cout << "dijkstra_segmented: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        cout << "dijkstra_segmented: " << (test_index+1) <<"/" << test_count << " " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
 
         env.clear();
     }
@@ -304,7 +304,7 @@ void solve_map_pqdj(string scenepath, string root, string map_name, ofstream &ou
         path_length = path.size();
 
         output_file << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
-        cout << "pq_dijkstra: " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
+        cout << "pq_dijkstra: " << (test_index+1) <<"/" << test_count << " " << env.bucket << ", " << map_name << ", " << path_length << ", " << chrono::duration <double, milli> (diff_time).count() << '\n';
 
         env.clear();
     }

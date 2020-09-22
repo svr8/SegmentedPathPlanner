@@ -7,10 +7,10 @@
 using namespace std;
 
 int main() {
-    ifstream a("tests/grids/moving_ai/game_dragon_age_origins/alpha10/a_star.csv");
-    ifstream a_seg("tests/grids/moving_ai/game_dragon_age_origins/alpha10/a_star_segmented.csv");
-    ifstream pqdj("tests/grids/moving_ai/game_dragon_age_origins/alpha10/pq_dijkstra.csv");
-    ifstream pqdj_seg("tests/grids/moving_ai/game_dragon_age_origins/alpha10/pq_dijkstra_segmented.csv");
+    ifstream a("tests/grids/moving_ai/game_dragon_age_origins/alpha5/a_star.csv");
+    ifstream a_seg("tests/grids/moving_ai/game_dragon_age_origins/alpha5/a_star_segmented.csv");
+    ifstream pqdj("tests/grids/moving_ai/game_dragon_age_origins/alpha5/pq_dijkstra.csv");
+    ifstream pqdj_seg("tests/grids/moving_ai/game_dragon_age_origins/alpha5/pq_dijkstra_segmented.csv");
 
     string line_a, line_a_seg, line_pqdj, line_pqdj_seg;
     string_tokenizer st;

@@ -1,5 +1,11 @@
 # Documentation
 
+## System Requirements
+* GCC version >= 9.3.0 to run path planning algorithms
+* make
+* python3 to run map generator and visualiser (with numpy, matplotlib packages)
+
+
 ## How to Run
 Execute the following commands in root directory of this project.
 

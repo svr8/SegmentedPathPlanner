@@ -1,5 +1,11 @@
 # Documentation
 
+## How to Run
+Execute the following commands in root directory of this project.
+
+* `make clean build run_custom` to run tests on custom dense map datasets.
+* `make clean build run_movingai` to run tests on Dragon Age: Origins game datasets.
+
 ## Folder Structure
 
 | Folder Name  | Description | Docs |

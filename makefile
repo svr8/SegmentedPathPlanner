@@ -44,6 +44,9 @@ run_movingai:
 	./app
 
 run_testjoin_movingai_dao:
+	# delete app
+	rm ./app
+
 	# build temp
 	g++ -c main/testjoin_movingai_dao.cpp -I ./main -o ./builds/testjoin_movingai_dao.o
 
@@ -51,7 +54,20 @@ run_testjoin_movingai_dao:
 	g++ -o app ./builds/string_tokenizer.o ./builds/testjoin_movingai_dao.o
 
 	# execute
-	# ./app
+	./app > out
+
+run_testjoin_custom_random:
+	# delete app
+	rm ./app
+
+	# build temp
+	g++ -c main/testjoin_custom_random.cpp -I ./main -o ./builds/testjoin_custom_random.o
+
+	# link to main
+	g++ -o app ./builds/string_tokenizer.o ./builds/testjoin_custom_random.o
+
+	# execute
+	./app > out
 
 clean:
 	rm -rf ./app ./builds/*

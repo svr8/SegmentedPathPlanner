@@ -18,10 +18,10 @@ string trim(const string& str)
 }
 
 int main() {
-    ifstream a("tests/grids/moving_ai/game_dragon_age_origins/alpha5/a_star.csv");
-    ifstream a_seg("tests/grids/moving_ai/game_dragon_age_origins/alpha5/a_star_segmented.csv");
-    ifstream pqdj("tests/grids/moving_ai/game_dragon_age_origins/alpha5/pq_dijkstra.csv");
-    ifstream pqdj_seg("tests/grids/moving_ai/game_dragon_age_origins/alpha5/pq_dijkstra_segmented.csv");
+    ifstream a("tests/grids/custom_random/maps_250x250/alpha5/a_star.csv");
+    ifstream a_seg("tests/grids/custom_random/maps_250x250/alpha5/a_star_segmented.csv");
+    ifstream pqdj("tests/grids/custom_random/maps_250x250/alpha5/pq_dijkstra.csv");
+    ifstream pqdj_seg("tests/grids/custom_random/maps_250x250/alpha5/pq_dijkstra_segmented.csv");
 
     string line_a, line_a_seg, line_pqdj, line_pqdj_seg;
     string_tokenizer st;
@@ -38,26 +38,24 @@ int main() {
     getline(pqdj, line_pqdj);
     getline(pqdj_seg, line_pqdj_seg);
 
-    cout << "Test Index, Map Name, A* Seg Path Length, A* Seg Time(ms), PQDJ Segmented Path Length, PQDJ Segmented Time(ms)" << endl;
-
-    for(int i=1;i<=155620;i++) {
+    for(int i=1;i<=1000;i++) {
         getline(a, line_a);
         getline(a_seg, line_a_seg);
         getline(pqdj, line_pqdj);
         getline(pqdj_seg, line_pqdj_seg);
 
-        st = string_tokenizer(line_a_seg, ',');
+        st = string_tokenizer(line_a, ',');
         st.next();
-        cout << i << ", " << st.next() << ", " << st.next() << ", " ;
+        cout << i << ", " << st.next() << ", ";
         data = st.next();
         time_l = stod(trim(data));
         cout << data << ", ";
 
         st = string_tokenizer(line_pqdj_seg, ',');
-        st.next(); st.next();
+        st.next();
         cout << st.next() << ", ";
         data = st.next();
-        time_r = stod(trim(data));
+        time_l = stod(trim(data));
         cout << data << ", ";
         
         if(time_l < time_r) { 
@@ -72,6 +70,8 @@ int main() {
             av_y += diff;
             max_y = diff>max_y ? diff : max_y;
         }
+
+        cout << (time_l<time_r);
 
         // st = string_tokenizer(line_pqdj, ',');
         // st.next(); st.next();

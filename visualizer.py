@@ -99,11 +99,11 @@ def simulate_bot(img, cur_pos, simFilePath):
     cur_pos = [col, row]
 
 def main():
-  env = arena('datasets/custom_random/maps_250x250/sample0')
+  env = arena('datasets/grids/custom_random/maps_250x250/sample0')
   arena_img = show_arena(env)
   print(env)
   cur_pos = [env.startCell[0], env.startCell[1]]
-  simulate_bot(arena_img, cur_pos, 'tests/path/sample0')
+  # simulate_bot(arena_img, cur_pos, 'tests/path/sample0')
 
   plt.pause(1)
 

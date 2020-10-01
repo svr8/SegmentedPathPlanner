@@ -171,26 +171,26 @@ int main() {
 
   
   // Dijkstra
-  output_path = TEST_PATH_PREFIX + "dijkstra.csv";
-  output_file.open(output_path);
-  output_file << "Map Label, Path Length, Time (ms)\n";
-  for(int i=0;i<1000;i++) {
-    string input_path = MAP_PATH_PREFIX + to_string(i);
-    solve_map_dijkstra(input_path, output_file);
-  }
-  output_file.flush();
-  output_file.close();
+  // output_path = TEST_PATH_PREFIX + "dijkstra.csv";
+  // output_file.open(output_path);
+  // output_file << "Map Label, Path Length, Time (ms)\n";
+  // for(int i=0;i<1000;i++) {
+  //   string input_path = MAP_PATH_PREFIX + to_string(i);
+  //   solve_map_dijkstra(input_path, output_file);
+  // }
+  // output_file.flush();
+  // output_file.close();
   
   // Dijkstra Segmented
-  output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
-  output_file.open(output_path);
-  output_file << "Map Label, Path Length, Time (ms)\n";
-  for(int i=0;i<1000;i++) {
-    string input_path = MAP_PATH_PREFIX + to_string(i);
-    solve_map_dijkstra_segmented(input_path, output_file);
-  }
-  output_file.flush();
-  output_file.close();
+  // output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
+  // output_file.open(output_path);
+  // output_file << "Map Label, Path Length, Time (ms)\n";
+  // for(int i=0;i<1000;i++) {
+  //   string input_path = MAP_PATH_PREFIX + to_string(i);
+  //   solve_map_dijkstra_segmented(input_path, output_file);
+  // }
+  // output_file.flush();
+  // output_file.close();
 
   // Priority Queue based Dijkstra
   output_path = TEST_PATH_PREFIX + "pq_dijkstra.csv";

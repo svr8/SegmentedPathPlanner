@@ -356,5 +356,7 @@ void robot_astar::scan_cell(cell c, cell &destination) {
   else {
     open_list_state[successor.pos.row][successor.pos.col] = successor.f;
     open_list.push(successor);
+    if(!parent[cur_node.pos.row][cur_node.pos.col].is_equal(c))
+          parent[row][col] = cell(cur_node.pos.row, cur_node.pos.col);
   }
 }

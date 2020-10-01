@@ -341,23 +341,20 @@ void robot_astar::scan_cell(cell c, cell &destination) {
   successor.f = successor.g + successor.h; 
 
   if(
-      closed_list_state[successor.pos.row][successor.pos.col]==-1 &&
-      (
-        open_list_state[successor.pos.row][successor.pos.col]==-1 ||
-        ( 
-          open_list_state[successor.pos.row][successor.pos.col]!=-1 &&
-          open_list_state[successor.pos.row][successor.pos.col]>=successor.f
-        )
-      )     
+      open_list_state[successor.pos.row][successor.pos.col] != -1 &&
+      open_list_state[successor.pos.row][successor.pos.col] < successor.f
     ) {
-       open_list.push(successor);
-       open_list_state[successor.pos.row][successor.pos.col] = successor.f;
-       if(!parent[cur_node.pos.row][cur_node.pos.col].is_equal(c))
-          parent[row][col] = cell(cur_node.pos.row, cur_node.pos.col);
-  }
-
-  else if(closed_list_state[successor.pos.row][successor.pos.col]==-1) {
-    closed_list_state[successor.pos.row][successor.pos.col] = successor.f;
-  }
+      return;
+    }
   
+  else if( 
+      closed_list_state[successor.pos.row][successor.pos.col] != -1 && 
+      closed_list_state[successor.pos.row][successor.pos.col] < successor.f
+    ) {
+      return;
+    }
+  else {
+    open_list_state[successor.pos.row][successor.pos.col] = successor.f;
+    open_list.push(successor);
+  }
 }

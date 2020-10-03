@@ -229,107 +229,19 @@ cell robot_dj::get_next_segment(cell &destination, int &alpha) {
   double d2;
   bool flag = true;
 
-  // bottom left
-  if(cur_pos.row-alpha>=0 && cur_pos.col-alpha>=0) {
-    t.row = cur_pos.row-alpha;
-    t.col = cur_pos.col-alpha;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
- 
-  // bottom
-  if(cur_pos.row-alpha>=0) {
-    t.row = cur_pos.row-alpha;
-    t.col = cur_pos.col;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
- 
-  // bottom right
-  if(cur_pos.row-alpha>=0 && cur_pos.col+alpha<env.width) {
-    t.row = cur_pos.row-alpha;
-    t.col = cur_pos.col+alpha;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
-  
-  // left
-  if(cur_pos.col-alpha>=0) {
-    t.row = cur_pos.row;
-    t.col = cur_pos.col-alpha;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
-  
-  // right
-  if(cur_pos.col+alpha<env.width) {
-    t.row = cur_pos.row;
-    t.col = cur_pos.col+alpha;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
-  
-  // top left
-  if(cur_pos.row+alpha<env.height && cur_pos.col-alpha>=0) {
-    t.row = cur_pos.row+alpha;
-    t.col = cur_pos.col-alpha;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
-  
-  // top
-  if(cur_pos.row+alpha<env.height) {
-    t.row = cur_pos.row+alpha;
-    t.col = cur_pos.col;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
-    }
-  }
-
-  // top right
-  if(cur_pos.row+alpha<env.height && cur_pos.col+alpha<env.width) {
-    t.row = cur_pos.row+alpha;
-    t.col = cur_pos.col+alpha;
-    d2 = t.euclidean_distance(destination);
-    if(d2<d1) {
-      res.row = t.row;
-      res.col = t.col;
-      d1 = d2;
-      flag = false;
+  for(int i=cur_pos.row-alpha; i<=cur_pos.row+alpha; i+=alpha) {
+    for(int j=cur_pos.col-alpha; j<=cur_pos.col+alpha; j+=alpha) {
+      if(i>=0 && j>=0 && i<env.height && j<env.width) {
+        t.row = i;
+        t.col = j;
+        d2 = t.euclidean_distance(destination);
+        if(d2<d1) {
+          res.row = t.row;
+          res.col = t.col;
+          d1 = d2;
+          flag = false;
+        }
+      }
     }
   }
 

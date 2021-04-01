@@ -6,7 +6,7 @@ build:
 	g++ -c cell/cell.cpp -I ./cell -o ./builds/cell.o
 
 	# build a_star node
-	g++ -c node/node_astar.cpp -I ./node -o ./builds/node_astar.o
+	g++ -c node/node_astar.cpp -I ./node -o ./builds/node_astar.o`
 
 	# build priority queue based dijkstra node
 	g++ -c node/node_pqdj.cpp -I ./node -o ./builds/node_pqdj.o
@@ -25,7 +25,7 @@ build:
 
 run_custom:
 	# build main for custom maps
-	g++ -c main/main_custom.cpp -I./main -o ./builds/main_custom.o
+	g++ -c main/main_custom.cpp -I ./main -o ./builds/main_custom.o
 
 	# link all objects to main
 	g++ -o app ./builds/string_tokenizer.o ./builds/cell.o ./builds/node_astar.o ./builds/node_pqdj.o ./builds/arena.o ./builds/robot_astar.o ./builds/robot_dj.o ./builds/main_custom.o

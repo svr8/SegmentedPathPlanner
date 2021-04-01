@@ -175,7 +175,7 @@ const string scene_list[] = {
     "rmtst03.map.scen",
     "rmtst.map.scen"
 };
-const scene_list_count = sizeof(scene_list) / sizeof(scene_list[0]);
+const int scene_list_count = sizeof(scene_list) / sizeof(scene_list[0]);
 
 int get_scene_tests_count(string scenepath) {
     ifstream scenefile(scenepath);
@@ -387,6 +387,9 @@ void test_dijkstra() {
 }
 
 void test_dijkstra_segmented() {
+    string output_path;
+    ofstream output_file;
+
     output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
@@ -401,6 +404,9 @@ void test_dijkstra_segmented() {
 }
 
 void test_pqdj() {
+    string output_path;
+    ofstream output_file;
+
     output_path = TEST_PATH_PREFIX + "pq_dijkstra.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
@@ -414,7 +420,10 @@ void test_pqdj() {
     output_file.close();
 }
 
-void test_pqds_segmented() {
+void test_pqdj_segmented() {
+    string output_path;
+    ofstream output_file;
+
     output_path = TEST_PATH_PREFIX + "pq_dijkstra_segmented_0.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
@@ -433,7 +442,7 @@ int main(int argc, char *argv[]) {
     test_dijkstra();
     test_dijkstra_segmented();
     test_pqdj();
-    test_pqds_segmented();
+    test_pqdj_segmented();
     
     return 0;
 }

@@ -1,6 +1,6 @@
 # SegmentedPathPlanner
 
-This is the implementation of path planning approach proposed in [Segmented Approach to Path Planning](https://ieeexplore.ieee.org/document/9315788/).
+This is the implementation of path planning approach proposed in the paper [Segmented Approach to Path Planning](https://ieeexplore.ieee.org/document/9315788/).
 
 ## System Requirements
 * GCC version >= 9.3.0 to run path planning algorithms

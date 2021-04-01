@@ -19,4 +19,4 @@ Please find the complete documentation [here](documentation/index.md).
 
 Copyright © 2021 Manipal University Jaipur
 
-Author(s): [Shikhar Vaish](https://www.linkedin.com/in/shikhar-vaish/); Shreyam; Sunita Singhal
+Author(s): [Shikhar Vaish](https://www.linkedin.com/in/shikhar-vaish/); [Shreyam](www.linkedin.com/in/shreyam98); Sunita Singhal

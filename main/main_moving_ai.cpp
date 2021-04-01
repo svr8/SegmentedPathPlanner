@@ -175,6 +175,7 @@ const string scene_list[] = {
     "rmtst03.map.scen",
     "rmtst.map.scen"
 };
+const scene_list_count = sizeof(scene_list) / sizeof(scene_list[0]);
 
 int get_scene_tests_count(string scenepath) {
     ifstream scenefile(scenepath);
@@ -334,81 +335,105 @@ void solve_map_pqdj_segmented(string scenepath, string root, string map_name, of
     }
 }
 
-int main(int argc, char *argv[]) {
+void test_a_star() {
     string output_path;
     ofstream output_file;
 
-    // A Star
     output_path = TEST_PATH_PREFIX + "a_star.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
+    for(int i=0;i<scene_list_count;i++) {
         string map = scene_list[i];
         string scenepath = SCENE_PATH_PREFIX + map;
         solve_map_astar(scenepath, application, map, output_file);
     }
+
     output_file.flush();
     output_file.close();
+}
 
-    // A Star Segmented
+void test_a_star_segmented() {
+    string output_path;
+    ofstream output_file;
+
     output_path = TEST_PATH_PREFIX + "a_star_segmented.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
+    for(int i=0;i<scene_list_count;i++) {
         string map = scene_list[i];
         string scenepath = SCENE_PATH_PREFIX + map;
         solve_map_astar_segmented(scenepath, application, map, output_file);
     }
+
     output_file.flush();
     output_file.close();
+}
 
-    // Dijkstra
+void test_dijkstra() {
+    string output_path;
+    ofstream output_file;
+
     output_path = TEST_PATH_PREFIX + "dijkstra.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
+    for(int i=0;i<scene_list_count;i++) {
         string map = scene_list[i];
         string scenepath = SCENE_PATH_PREFIX + map;
         solve_map_dijkstra(scenepath, application, map, output_file);
     }
+
     output_file.flush();
     output_file.close();
+}
 
-    // Dijkstra Segmented
+void test_dijkstra_segmented() {
     output_path = TEST_PATH_PREFIX + "dijkstra_segmented.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
+    for(int i=0;i<scene_list_count;i++) {
         string map = scene_list[i];
         string scenepath = SCENE_PATH_PREFIX + map;
         solve_map_dijkstra_segmented(scenepath, application, map, output_file);
     }
+
     output_file.flush();
     output_file.close();
+}
 
-    // Priority Queue based Dijkstra
+void test_pqdj() {
     output_path = TEST_PATH_PREFIX + "pq_dijkstra.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
+    for(int i=0;i<scene_list_count;i++) {
         string map = scene_list[i];
         string scenepath = SCENE_PATH_PREFIX + map;
         solve_map_pqdj(scenepath, application, map, output_file);
     }
+
     output_file.flush();
     output_file.close();
+}
 
-    // Priority Queue based Dijkstra Segmented
+void test_pqds_segmented() {
     output_path = TEST_PATH_PREFIX + "pq_dijkstra_segmented_0.csv";
     output_file.open(output_path);
     output_file << "Bucket, Map Name, Path Length, Time(ms)" << endl;
-    for(int i=0;i<156;i++) {
+    for(int i=0;i<scene_list_count;i++) {
         string map = scene_list[i];
         string scenepath = SCENE_PATH_PREFIX + map;
         solve_map_pqdj_segmented(scenepath, application, map, output_file);
     }
     output_file.flush();
     output_file.close();
+}
 
+int main(int argc, char *argv[]) {
+    test_a_star();
+    test_a_star_segmented();
+    test_dijkstra();
+    test_dijkstra_segmented();
+    test_pqdj();
+    test_pqds_segmented();
+    
     return 0;
 }
